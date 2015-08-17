@@ -16,6 +16,11 @@
 
     class TaskTest extends PHPUnit_Framework_TestCase {
 
+
+        protected function tearDown() {
+            Task::deleteAll();
+        }
+
         function test_save() {
             //Arrange
             $description = "Wash the dog";
@@ -44,6 +49,26 @@
 
             //Assert
             $this->assertEquals([$test_Task, $test_Task2], $result);
+
+        }
+
+        function test_deleteAll() {
+
+            //Arrange
+            $description = "Wash the dog";
+            $description2 = "Water the lawn";
+            $test_Task = new Task($description);
+            $test_Task->save();
+            $test_Task2 = new Task($description);
+            $test_Task2->save();
+
+            //Act
+            Task::deleteAll();
+
+            //Assert
+            $result = Task::getAll();
+            $this->assertEquals([], $result);
+
 
         }
     }
