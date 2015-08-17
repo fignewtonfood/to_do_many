@@ -58,6 +58,57 @@
             //Assert
             $this->assertEquals($test_Category, $result[0]);
         }
+
+        function test_getAll() {
+
+            //Arrange
+            $name = "Work stuff";
+            $name2 = "Home stuff";
+            $test_Category = new Category($name);
+            $test_Category->save();
+            $test_Category2 = new Category($name2);
+            $test_Category2->save();
+
+            //Act
+            $result = Category::getAll();
+
+            //Assert
+            $this->assertEquals([$test_Category, $test_Category2], $result);
+        }
+
+        function test_deleteAll() {
+            //Arrange
+            $name = "Wash the dog";
+            $name2 = "Home stuff";
+            $test_Category = new Category($name);
+            $test_Category->save();
+            $test_Category2 = new Category($name2);
+            $test_Category2->save();
+
+            //Act
+            Category::deleteAll();
+            $result = Category::getAll();
+
+            //Assert
+            $this->assertEquals([], $result);
+        }
+
+        function test_find() {
+
+            //Arrange
+            $name = "Wash the dog";
+            $name2 = "Home stuff";
+            $test_Category = new Category($name);
+            $test_Category->save();
+            $test_Category2 = new Category($name2);
+            $test_Category2->save();
+
+            //Act
+            $result = Category::find($test_Category->getId());
+
+            //Assert
+            $this->assertEquals($test_Category, $result);
+        }
     }
 
 ?>
