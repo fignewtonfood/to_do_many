@@ -1,6 +1,6 @@
 <?php
 
-    require_once "src/Task.php";
+    require_once "Task.php";
 
     class Category {
         private $name;
