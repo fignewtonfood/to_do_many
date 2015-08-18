@@ -15,10 +15,6 @@
             $this->name = (string) $new_name;
         }
 
-        // function setId($new_id) {
-        //     $this->id = (int) $new_id;
-        // }
-
         function getName() {
             return $this->name;
         }
@@ -33,8 +29,9 @@
             foreach($returned_tasks as $task) {
                 $description = $task['description'];
                 $id = $task['id'];
+                $due_date = $task['due_date'];
                 $category_id = $task['category_id'];
-                $new_task = new Task($description, $id, $category_id);
+                $new_task = new Task($description, $id, $due_date, $category_id);
                 array_push($tasks, $new_task);
             }
             return $tasks;
