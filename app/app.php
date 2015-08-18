@@ -39,9 +39,10 @@
   $app->post("/tasks", function () use ($app) {
       $id = null;
       $category_id = intval($_POST['category_id']);
+      $category_name = Category::find($category_id);
       $task = new Task($_POST['description'], $id, $_POST['due_date'], $category_id);
       $task->save();
-      return $app['twig']->render('tasks.html.twig', array('tasks' => Task::getAll(), 'categories' => Category::getAll()));
+      return $app['twig']->render('tasks.html.twig', array('tasks' => Task::getAll(), 'categories' => Category::getAll(), 'category_name' => $category_name));
   });
 
   $app->post("/delete_tasks", function() use ($app) {

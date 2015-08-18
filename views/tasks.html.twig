@@ -8,7 +8,12 @@
             <p>Here are all your Tasks:</p>
             <ul>
                 {% for task in tasks %}
-                    <li>{{ task.getDescription }} - {{ task.getDueDate }}  -  {{ task.getCategoryId }}</li>
+                    <li>{{ task.getDescription }} - {{ task.getDueDate }}  -
+                        {% for category in categories %}
+                            {% if task.getCategoryId == category.getId %}
+                                {{ category.getName }}</li>
+                            {% endif %}
+                        {% endfor %}
                 {% endfor %}
             </ul>
         {% endif %}
