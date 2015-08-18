@@ -1,5 +1,7 @@
 <?php
 
+    require_once "src/Task.php";
+
     class Category {
         private $name;
         private $id;
@@ -13,9 +15,9 @@
             $this->name = (string) $new_name;
         }
 
-        function setId($new_id) {
-            $this->id = (string) $new_id;
-        }
+        // function setId($new_id) {
+        //     $this->id = (int) $new_id;
+        // }
 
         function getName() {
             return $this->name;
@@ -25,10 +27,23 @@
             return $this->id;
         }
 
+        function getTasks() {
+            $tasks = Array();
+            $returned_tasks = $GLOBALS['DB']->query("SELECT * FROM tasks WHERE category_id = {$this->getId()};");
+            foreach($returned_tasks as $task) {
+                $description = $task['description'];
+                $id = $task['id'];
+                $category_id = $task['category_id'];
+                $new_task = new Task($description, $id, $category_id);
+                array_push($tasks, $new_task);
+            }
+            return $tasks;
+        }
+
         function save() {
             $GLOBALS['DB']->exec("INSERT INTO categories (name) VALUES ('{$this->getName()}')");
-            $result_id = $GLOBALS['DB']->lastInsertId();
-            $this->setId($result_id);
+            $this->id = $GLOBALS['DB']->lastInsertId();
+
         }
 
         static function getAll() {

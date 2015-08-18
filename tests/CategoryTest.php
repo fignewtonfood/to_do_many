@@ -7,6 +7,7 @@
     */
 
     require_once "src/Category.php";
+    require_once "src/Task.php";
 
     $server = 'mysql:host=localhost;dbname=to_do_test';
     $username = 'root';
@@ -18,6 +19,7 @@
 
         protected function tearDown() {
             Category::deleteAll();
+            Task::deleteAll();
         }
 
         function test_getName() {
