@@ -1,37 +1,43 @@
 <html>
     <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/../main.css">
         <title>To Do List</title>
     </head>
     <body>
-        <h1>Tasks</h1>
-        {% if tasks is not empty %}
-            <p>Here are all your Tasks:</p>
-            <ul>
-                {% for task in tasks %}
-                    <li><a href="/tasks/{{ task.getId }}">{{ task.getTaskName }}</a> - {{ task.getDueDate }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-
-            <form action='/tasks' method='post'>
-                <label for='task_name'>Task Name</label>
-                <input id='task_name' name='task_name' type='text'>
-                <label for='due_date'>Due Date</label>
-                <input id='due_date' name='due_date' type='date'>
-                <!-- <select name="category_id">
-                    {% for category in categories %}
-                    <option value="{{ category.getId }}">{{ category.getCategoryName }}</option>
+        <div class="container">
+            <h2>Tasks</h2>
+            {% if tasks is not empty %}
+                <p>Here are all your Tasks:</p>
+                <ul class="list-group">
+                    {% for task in tasks %}
+                        <li class="list-group-item"><a href="/tasks/{{ task.getId }}">{{ task.getTaskName }}</a> - {{ task.getDueDate }}</li>
                     {% endfor %}
-                </select> -->
+                </ul>
+            {% endif %}
+            <div class="form-group">
+                <form action='/tasks' method='post'>
+                    <label for='task_name'>Task Name</label>
+                    <input id='task_name' name='task_name' type='text'>
+                    <label for='due_date'>Due Date</label>
+                    <input id='due_date' name='due_date' type='date'>
+                    <!-- <select name="category_id">
+                        {% for category in categories %}
+                        <option value="{{ category.getId }}">{{ category.getCategoryName }}</option>
+                        {% endfor %}
+                    </select> -->
 
-                <button type='submit'>Add Task</button>
-            </form>
+                    <button class="btn btn-default" type='submit'>Add Task</button>
+                </form>
+            </div>
 
-            <form action='/delete_tasks' method='post'>
-                <button type='submit'>Clear</button>
-            </form>
+            <div class="form-group">
+                <form action='/delete_tasks' method='post'>
+                    <button class="btn btn-default" type='submit'>Clear</button>
+                </form>
+            </div>
 
-            <p><a href='/'>Home</a></p>
-
+                <p><a href='/'>Home</a></p>
+        </div>
     </body>
 </html>
